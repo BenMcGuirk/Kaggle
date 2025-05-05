@@ -1,45 +1,64 @@
-import pandas as pd
-import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 
-def preprocess_data(data):
-    # Separate features and target
-    X = data.drop(columns=['id', 'Calories'])
-    y = data['Calories']
+caps = {}
+def clean_data(data):
+    # Convert age to float
+    data['Age'] = data['Age'].astype(float)
+
+    # Binary encode sex
+    data['Sex'] = data['Sex'].map({'male': 1, 'female': 0})
     
+    # Handle duplicate columns - aggregate target values
+    features = ['Sex', 'Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp']
+    data = data.groupby(features, as_index=False)['Calories'].mean()
+
+    # Cap outliers
+    for col in ['Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp', 'Calories']:
+        lower = data[col].quantile(0.01)
+        upper = data[col].quantile(0.99)
+        caps[col] = (lower, upper)
+        data[col] = data[col].clip(lower, upper)
+
+    return data
+
+def clean_test_data(data):
+    # Convert age to float
+    data['Age'] = data['Age'].astype(float)
+
+    # Binary encode sex
+    data['Sex'] = data['Sex'].map({'male': 1, 'female': 0})
+
+    # Cap outliers
+    for col in ['Age', 'Height', 'Weight', 'Duration', 'Heart_Rate', 'Body_Temp']:
+        lower, upper = caps[col]
+        data[col] = data[col].clip(lower, upper)
+
+    return data
+
+def build_preprocessor(X):
     # Identify column types
-    cat_cols = X.select_dtypes(include=['object', 'category']).columns
-    num_cols = X.select_dtypes(include=['int64', 'float64']).columns
+    cat_cols = X.select_dtypes(include=['object', 'category']).columns.tolist()
+    num_cols = X.select_dtypes(include=['int64', 'float64']).columns.tolist()
     
-    # Create preprocessing pipelines
+    # Build pipelines
     num_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())
     ])
-    
     cat_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
         ('onehot', OneHotEncoder(handle_unknown='ignore'))
     ])
-    
-    # Combine preprocessing pipelines
     preprocessor = ColumnTransformer([
         ('num', num_pipeline, num_cols),
         ('cat', cat_pipeline, cat_cols)
     ])
-    
-    # Apply preprocessing
-    X_processed = preprocessor.fit_transform(X)
-    
-    return X_processed, y, preprocessor
+    return preprocessor
 
-if __name__ == "__main__":
-    data = pd.read_csv('train.csv')
-    X_processed, y, preprocessor = preprocess_data(data)
-    
-    # Save preprocessor for later use
-    import joblib
-    joblib.dump(preprocessor, 'preprocessor.pkl')
+def fit_and_transform_preprocessor(preprocessor, X_train, X_val):
+    X_train_processed = preprocessor.fit_transform(X_train)
+    X_val_processed = preprocessor.transform(X_val)
+    return X_train_processed, X_val_processed
