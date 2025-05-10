@@ -1,0 +1,17 @@
+{"time":"2025-05-10T15:23:21.319016+01:00","level":"INFO","msg":"stream: starting","core version":"0.19.11","symlink path":"/Users/wpw555/Documents/Kaggle/playground_s5e5/notebooks/wandb/run-20250510_152321-jlv9uwph/logs/debug-core.log"}
+{"time":"2025-05-10T15:23:21.574335+01:00","level":"INFO","msg":"created new stream","id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:21.574365+01:00","level":"INFO","msg":"stream: started","id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:21.574373+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:21.574394+01:00","level":"INFO","msg":"handler: started","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:21.574388+01:00","level":"INFO","msg":"sender: started","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:21.826598+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-05-10T15:23:22.358336+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/benmcguirk-queen-mary-university-of-london/xgboost-optimization/jlv9uwph/file_stream\": read tcp 192.168.1.71:56531->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-05-10T15:23:38.506593+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-05-10T15:23:38.506628+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-05-10T15:23:39.058184+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-05-10T15:23:39.245186+01:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-05-10T15:23:39.254911+01:00","level":"INFO","msg":"stream: closing","id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:39.254932+01:00","level":"INFO","msg":"handler: closed","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:39.254944+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:39.254993+01:00","level":"INFO","msg":"sender: closed","stream_id":"jlv9uwph"}
+{"time":"2025-05-10T15:23:39.255092+01:00","level":"INFO","msg":"stream: closed","id":"jlv9uwph"}

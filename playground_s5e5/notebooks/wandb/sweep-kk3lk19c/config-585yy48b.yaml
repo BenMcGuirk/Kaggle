@@ -1,0 +1,8 @@
+wandb_version: 1
+
+learning_rate:
+  value: 0.22809619392316835
+max_depth:
+  value: 7
+n_estimators:
+  value: 778

@@ -1,0 +1,16 @@
+{
+  "os": "macOS-14.7.5-arm64-arm-64bit",
+  "python": "CPython 3.9.21",
+  "startedAt": "2025-05-10T14:07:55.195638Z",
+  "program": "/Users/wpw555/Documents/Kaggle/playground_s5e5/notebooks/xgboost.ipynb",
+  "codePath": "playground_s5e5/notebooks/xgboost.ipynb",
+  "git": {
+    "remote": "git@github.com:BenMcGuirk/Kaggle.git",
+    "commit": "afaf14697d1f6a955b96da3fcdca3a2c8d0d7286"
+  },
+  "email": "b.mcguirk@qmul.ac.uk",
+  "root": "/Users/wpw555/Documents/Kaggle/playground_s5e5/notebooks",
+  "host": "CLN-JF-GQD9G2F2QL",
+  "executable": "/Users/wpw555/miniconda3/envs/kaggle-env/bin/python",
+  "codePathLocal": "xgboost.ipynb"
+}
