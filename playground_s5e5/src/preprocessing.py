@@ -72,6 +72,9 @@ def build_preprocessor(X):
     standard_cols = [
         'Duration_HR'    # Interaction term, might be normally distributed
     ]
+
+    used_num_cols = set(robust_cols + minmax_cols + standard_cols)
+    fallback_cols = list(set(num_cols) - used_num_cols)
     
     # Build pipelines
     robust_pipeline = Pipeline([
@@ -88,6 +91,11 @@ def build_preprocessor(X):
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())
     ])
+
+    fallback_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='median')),
+        ('scaler', StandardScaler())
+    ])
     
     cat_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='most_frequent')),
@@ -98,6 +106,7 @@ def build_preprocessor(X):
         ('robust', robust_pipeline, robust_cols),
         ('minmax', minmax_pipeline, minmax_cols),
         ('standard', standard_pipeline, standard_cols),
+        ('fallback', fallback_pipeline, fallback_cols),
         ('cat', cat_pipeline, cat_cols)
     ])
     
