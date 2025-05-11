@@ -5,8 +5,8 @@ from sklearn.compose import ColumnTransformer
 import numpy as np
 import pandas as pd
 
-caps = {}
 def clean_train_data(data):
+    caps = {}
     # Convert age to float
     data['Age'] = data['Age'].astype(float)
 
@@ -24,7 +24,7 @@ def clean_train_data(data):
         caps[col] = (lower, upper)
         data[col] = data[col].clip(lower, upper)
 
-    return data
+    return data, caps
 
 def clean_test_data(data):
     # Convert age to float
@@ -116,6 +116,10 @@ def fit_and_transform_preprocessor(preprocessor, X_train, X_val):
     X_train_processed = preprocessor.fit_transform(X_train)
     X_val_processed = preprocessor.transform(X_val)
     return X_train_processed, X_val_processed
+
+def fit_and_transform_full(preprocessor, X):
+    X_processed = preprocessor.fit_transform(X)
+    return X_processed
 
 def create_features(X):
     # BMI   
