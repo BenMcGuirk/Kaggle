@@ -23,7 +23,7 @@ def clean_train_data(data):
         upper = data[col].quantile(0.99)
         caps[col] = (lower, upper)
         data[col] = data[col].clip(lower, upper)
-
+        
     return data, caps
 
 def clean_test_data(data):
